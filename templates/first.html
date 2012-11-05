@@ -1,0 +1,50 @@
+{% extends "empty.html" %}
+{% block body %}
+	<table border = '1'>
+		<th>Имя</th>
+		<th>Логин</th>
+		<th>Работает</th>
+		<th>Общий лимит</th>
+		<th>Фильтр</th>
+		<th>АВ-лимит</th>
+		<th>Управление</th>
+		<th>Данные</th>
+		{% for doctor in doctors %}
+		<tr>
+			<td> {{ doctor.name }} </td>
+			<td> {{ doctor.engname }} </td>
+			<td> {% if doctor.working %} да {% else %} нет {% endif %} </td>
+			<td> {% if doctor.limit != -1 %} {{ doctor.limit }} {% else %} нет {% endif %} </td>
+			<td> {% if not doctor.stations%} нет {% else %} {% for station in doctor.stations %} {{ station }}; {% endfor %} {% endif %} </td>
+			<td> {% if doctor.ablimit != -1 %} {{ doctor.ablimit }} {% else %} нет {% endif %} </td>
+			<td>  {% if not program_working %} <a href = '/doctor/?name={{ doctor.engname }}'> Фильтры </a> &nbsp;
+			|| &nbsp;  <a href = '/schedule/?name={{ doctor.engname }}'> Расписание </a>
+				  {% else %} программа работает {% endif %} </td>
+			<td> <a href = 'small-statistics/?name={{ doctor.engname }}'> Статистика </a>
+		</tr>
+		{% endfor %}
+	</table>
+	<a href = 'small-statistics/'> Общая статитстика </a>
+	<hr>
+	<div style="vertical-align:middle;"> 
+		{% if program_working %}
+			Программа работает <img width="40" height="40" src="{{ url_for('static', filename='img/done.png') }}" />  
+			<a href='/?stop=1'> остановить </a>
+		{% else %}
+			Программа не работает <img width="40" height="30" src="{{ url_for('static', filename='img/stop.jpg') }}" />  
+			<a href='/?start=1'> запустить </a>
+		{% endif %}
+	</div>
+	<hr>
+	{% if program_working %}
+		Управление докторами возможно только при выключеной программе
+	{% else %}
+		<a href = '/doctor_control/'> Управление докторами </a>
+	{% endif %}
+	<hr>
+	{% if program_working %}
+		Перемещение в архив возможно только при выключенной программе
+	{% else %}
+		<a href = '/archive/'> Перемещение в архив </a>
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "empty.html" %}
+{% block body %}
+	{% if not doctor %}
+		<h3> Добавление нового доктора </h3>
+	{% else %}
+		<h3> Установка фильтров доктора </h3>
+	{% endif %}
+	<form method = 'POST'>
+	<table>
+		<tr>
+			<td>Имя</td>
+			<td>{% if not doctor %}
+					<input name="name" type="text" size="40">
+				{% else %}
+					<b> {{ doctor.name }} </b>
+				{% endif %}
+			</td>
+		</tr>
+		<tr>
+			<td>Логин</td>
+			<td>
+				{% if not doctor %}
+					<input name="engname" type="text" size="40">
+				{% else %}
+					<b> {{ doctor.engname }} </b>
+				{% endif %}
+			</td>
+		</tr>
+		<tr><td>Общий лимит</td>
+			<td><input name="limit" type="checkbox" {% if doctor.limit != -1 %} checked {% endif %}>
+			<input name="limitvalue" type="text" size = "5" {% if doctor.limit != -1 %} value = {{ doctor.limit }} {% endif %}>
+			</td> </tr>
+		<tr><td>Фильтр</td>
+			<td><input name="stations" type="text" size="40" value = '{{ doctor.formated_stations }}'></td></tr></td></tr>
+		<tr><td>АВ-лимит</td>
+			<td><input name="ablimit" type="checkbox" {% if doctor.ablimit != -1 %} checked {% endif %}>
+			<input name="ablimitvalue" type="text" size = "5" {% if doctor.ablimit != -1 %} value = {{ doctor.ablimit }} {% endif %}>
+			</td> </tr>
+	</table>
+		<br/> <input type="submit" value="Сохранить">
+	</form>
+	<hr>
+	<a href = '/'> Назад на главную </a>
+{% endblock %}

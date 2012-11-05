@@ -1,0 +1,35 @@
+{% extends "empty.html" %}
+{% block body %}
+
+
+<div align='center'>
+
+	<table border = "1">
+	<!-- <col span="5" style="background-color: hite;" />
+	<col span="2" style="background-color: lightgrey;" /> -->
+		<th style='background: grey'>Доктор/Дата</th>
+		{% for day in range(monthrange) %}
+		<th style='background: grey'>&nbsp;{{ day + 1 }}&nbsp;</th>
+		{% endfor %}
+		<th style='background: grey'>Сумма</th>
+		{% for d in data %}
+			<tr>
+				<td width = 8%> {{ d[0] }} </td>
+				{% for day in range(monthrange) %}
+					{% if d[1][day + 1] != -1 %}
+						<td width = 2% style='text-align: center'> &nbsp;{{ d[1][day + 1] }}&nbsp; </td>
+					{% else %}
+						<td width = 2% style='background: lightgrey'> &nbsp; </td>
+					{% endif %} 
+				{% endfor %}
+				<td width = 5% style='background: #8c96c1; text-align: center'> {{ d[1]['sum'] }} </td>
+			</tr>
+		{% endfor %}
+		
+	</table>
+
+</div>
+<hr>
+<a href = '/'> Назад на главную </a>
+{% endblock %}
+

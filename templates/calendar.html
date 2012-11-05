@@ -1,0 +1,46 @@
+{% extends "empty.html" %}
+{% block body %}
+
+{% macro cell(day) -%}
+	{% if day.type != 'empty' %} 
+		{{ day.value }} 
+		{% if day.type != 'passive' %} 
+		<input name="{{ day.fullvalue }}" type="checkbox" {% if day.type != 'unchecked' %} checked {% endif %}>
+		{% endif %}
+	{% endif %}
+{%- endmacro %}
+<div align='center'>
+	<h2> {{ doctor.name }} </h2>
+	<p> Внимание: галочками выбраны нерабочие дни </p>
+	<form method = 'POST'>
+	{% for month in monthes %}
+		<h3>{{ month.name }}</h3>
+		<table border = "1">
+		<col span="5" style="background-color: hite;" />
+		<col span="2" style="background-color: lightgrey;" />
+			<th style='background: grey'>Пн</th>
+			<th style='background: grey'>Вт</th>
+			<th style='background: grey'>Ср</th>
+			<th style='background: grey'>Чт</th>
+			<th style='background: grey'>Пт</th>
+			<th style='background: grey'>Сб</th>
+			<th style='background: grey'>Вс</th>
+			{% for i in month.weeks_range %}
+				<tr>
+				{% for day in month.data[i*7:(i+1)*7] %}
+					<td width = 10% style='text-align: center'>
+						{% if day.type != 'empty' %}{% if day.value < 10 %}&nbsp;{% endif %}{% endif %} {{ cell(day) }}
+					</td>
+				{% endfor %}
+				</tr>
+			{% endfor %}
+		</table>
+		<br>
+	{% endfor %}
+	<input type="submit" value="Сохранить">
+	</form>
+</div>
+<hr>
+<a href = '/'> Назад на главную </a>
+{% endblock %}
+

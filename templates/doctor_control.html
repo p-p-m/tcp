@@ -1,0 +1,29 @@
+{% extends "empty.html" %}
+{% block body %}
+<script type="text/javascript"> 
+	function message (name, engname) {
+		alert('hi');
+		if confirm('Вы уверены что хотите удалить ' + name + '?') {
+			
+		}
+	}
+</script>
+<div>
+	<h3> Удаление докторов: </h3>
+	<table>
+	{% for doctor in doctors %}
+		<tr>
+			<td> {{ doctor.name }} </td>
+			<td> <input type="button" value="Удалить" 
+			onclick="if (confirm('Вы уверены что хотите удалить {{ doctor.name }} ?')) { window.location.replace('/doctor_control/delete/?name={{ doctor.engname }}'); }" />
+			</td>
+		</tr>
+	{% endfor %}
+	</table>
+</div>
+<hr>
+	<a href= 'create/'> Добавить доктора </a>
+<hr>
+<a href = '/'> Назад на главную </a>
+
+{% endblock %}

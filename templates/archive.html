@@ -1,0 +1,12 @@
+{% extends "empty.html" %}
+{% block body %}
+<form method = 'POST'>
+	Перемещение в архив: <br>
+	<input name="date" type="text" size="40" value = ''>
+	<br/> <input type="submit" value="Начать перемещение">
+</form>
+<p> В папку "архив" перемещаются холтера которые были присланы раньше(строго раньше) указаной даты,<br>
+ Формат даты: дд.мм.гггг (например: 09.08.2012) </p> 
+<hr>
+<a href = '/'> Назад на главную </a>
+{% endblock %}
