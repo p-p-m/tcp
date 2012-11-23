@@ -1,0 +1,12 @@
+{% extends "empty.html" %}
+{% block body %}
+    <h3> Выгрузить отчёт на сервер: </h3>
+    <hr>
+    <h3> Загрузить холтер с сервера: </h3>
+    {% for date in holters.keys()|sort(true) %}
+        <p><b> дата: {{ date }} </b></p>
+        {% for holter in holters[date] %}
+            <p> <a href='?download_holter={{ holter }}&holter_date={{ date }}'> {{ holter }} </a> </p>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}

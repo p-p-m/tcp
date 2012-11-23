@@ -8,7 +8,7 @@ import datetime
 
 class Doctor(object):
 
-	def __init__(self, name = None, engname = None, folder = None, stations = [],
+	def __init__(self, name = None, engname = None, password = None, folder = None, stations = [],
 					load_path = None, limit = -1, working = True, ablimit = -1, unworking_dates = []):
 		self._name = name
 		self._engname = engname
@@ -18,6 +18,7 @@ class Doctor(object):
 		self._working = working
 		self._ablimit = ablimit
 		self._unworking_dates = unworking_dates
+		self._password = password
 		if load_path: self.load_doctor(load_path)
 
 	def name():
@@ -41,6 +42,17 @@ class Doctor(object):
 	        del self._engname
 	    return locals()
 	engname = property(**engname())
+
+	def password():
+	    doc = "The password property."
+	    def fget(self):
+	        return self._password
+	    def fset(self, value):
+	        self._password = value
+	    def fdel(self):
+	        del self._password
+	    return locals()
+	password = property(**password())
 
 	def folder():
 	    doc = "The folder property."

@@ -12,6 +12,6 @@ setup(name='telestat',
       description='moves data from holter files(.ZHR) to xls files',
       author='Pavel Marchuk',
       author_email='marchukpavelp@gmail.com',
-      py_modules = ['xls_saver', 'HolterWrapper'],
-      console=['xls_saver.py']
+      py_modules = ['holter_loader', 'HolterWrapper'],
+      console=['holter_loader.py']
      )

@@ -9,7 +9,9 @@ import datetime
 import random
 import shutil
 import time, msvcrt, copy
+
 from support.utf8_converter import setup_console
+from logger import pprint
 
 PROGRAM = False
 next_doctor = None
@@ -23,7 +25,7 @@ def _init_new_day():
 	for doctor in all_doctors():
 		prefolder = os.path.split(doctor.folder)[0]
 		if os.path.split(doctor.folder)[1] != _today_date():
-			print 'init new day', _today_date()
+			pprint ('init new day', _today_date())
 			doctor.folder = os.path.join(prefolder, _today_date())
 			doctor.save_doctor()
 
@@ -40,7 +42,7 @@ def _get_next_doctor(holter):
 
 def _move_holters(holters):
 	global next_doctor
-	if holters: print 'moving holters at:', datetime.datetime.now().strftime("%d-%m %H:%M")
+	if holters: pprint('moving holters at:', datetime.datetime.now().strftime("%d-%m %H:%M"))
 	for holter in holters:
 		if _reject_holter(holter): continue
 		next_doctor = _get_next_doctor(holter)
@@ -50,7 +52,7 @@ def _move_holters(holters):
 def _reject_holter(holter):
 	moved_holters_names = _get_all_holters_in_folder(DOCTORS)
 	if os.path.split(holter)[1].lower() in moved_holters_names:
-		print 'holter:', os.path.split(holter)[1], '>>> rejected' 
+		pprint('holter:', os.path.split(holter)[1], '>>> rejected')
 		shutil.copy2(holter, os.path.join(INBOX, 'rejected'))
 		os.remove(holter)
 		return True

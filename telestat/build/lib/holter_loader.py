@@ -19,18 +19,18 @@ from xlutils.copy import copy
 HOLTER_COLUMNS = {'holter_name' : 5, 'holter_date' : 3, 'station' : 4, 'day' : 0, 'month' : 1, 'year' : 2,
      'patient_name' : 6, 'patient_birth_date' : 7, 'holter_path' : 8}
 COLUMN_NAMES = [u'Дата', u"Код", u"Имя холтера", u"Имя пациента", u"Дата рождения", u"Путь к холтеру"]
+FOLDERS = (u'\\\\MYBOOKLIVE\\Public\\2012\\MAY\\22.5.2012', u'C:\\Program Files\\Holter\\Inbox')
 INT_COLUMNS = 'day', 'month', 'year'
-
-PATH_FILE = 'path.ini'
 
 # f = open('path.txt', 'wb')
 # f.write(' ; '.join(FOLDERS))
 # f.close()
 
 def holter_folders():
-    f = open('path.ini')
+    f = open('path.txt')
     folders = f.read()
     f.close()
+    # return FOLDERS
     return [folder.strip().decode('utf-8') for folder in folders.split(';')]
 
 
@@ -92,7 +92,7 @@ def _get_all_holters_in_folder(folder):
 
 def write_new_holters(folders, output):
     '''
-    Finds holters in given folders with subfolders. Checks does this holters exist in output file, if doesn`t reads data from 
+    finds holters in given folders with subfolders. Checks does this holters exist in output file, if doesn`t reads data from 
     holters and saves it in output file. If there are any error pathes saves them into error_holters.txt
     '''
     existing_holters = _get_existing_holters(output) if os.path.exists(output) else []
@@ -119,13 +119,10 @@ def write_new_holters(folders, output):
         f.close()
 
 
-def run():
+if __name__ == '__main__':
     print 'programa zapushena. Poisk unikalnih holterov...'
     print holter_folders()
     write_new_holters(holter_folders(), 'holters.xls')
     raw_input("Programa zavershila rabotu, nashmite enter")
-
-
-if __name__ == '__main__':
-    run()
+    # print os.listdir(u'C:\Pasha\Test')
 
