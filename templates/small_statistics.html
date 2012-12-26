@@ -1,8 +1,34 @@
 {% extends "empty.html" %}
 {% block body %}
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+    function show_statistics(holters_data) {
+    	// this functions shows popup menu with holters data
+    	var popupdiv = document.getElementById('popup');
+    	var content = document.createElement('div');
+    	content.innerHTML = '<table border = 1 align = center style="width:80%; background:white;">' + 
+    		holters_data + 
+    		'</table>'
+    	content.id = 'holters_table'
+    	popupdiv.appendChild(content);
+    	popupdiv.style.display = '';
+    }
 
+    function hide_statistics() {
+    	// hides popup menu with holters data
+		var popupdiv = document.getElementById('popup')
+    	popupdiv.style.display = 'none';
+    	var content = document.getElementById('holters_table')
+    	content.parentNode.removeChild(content)
+    }
 
-<div align='center'>
+</script>
+
+<div id='popup' style='margin-left: -45%; top: 5%; left: 50%; width: 90%; height:80%; position: absolute; display: none; background: #bbbbbb; border-radius: 15px; border: groove;'>
+<div style='text-align: right; margin-right: 20px;'><a href='' onclick="hide_statistics();">Закрыть</a></div>
+</div>
+
+<div id='main' disabled='true' align='center'>
 
 	<table border = "1">
 	<!-- <col span="5" style="background-color: hite;" />
@@ -17,7 +43,9 @@
 				<td width = 8%> {{ d[0] }} </td>
 				{% for day in range(monthrange) %}
 					{% if d[1][day + 1] != -1 %}
-						<td width = 2% style='text-align: center'> &nbsp;{{ d[1][day + 1] }}&nbsp; </td>
+						<td width = 2% style='text-align: center'>
+						<a href='#' onclick='show_statistics("{{ (d[0]~"$"~(day+1))|holters_data }}");'>&nbsp;{{ d[1][day + 1] }}&nbsp; </a>
+						</td>
 					{% else %}
 						<td width = 2% style='background: lightgrey'> &nbsp; </td>
 					{% endif %} 

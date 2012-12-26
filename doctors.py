@@ -6,6 +6,8 @@ import glob
 import shutil, re
 import datetime
 
+from logger import pprint
+
 class Doctor(object):
 
 	def __init__(self, name = None, engname = None, password = None, folder = None, stations = [],
@@ -130,7 +132,7 @@ class Doctor(object):
 
 	def move_holter_to_folder(self, holter):
 		if not os.path.isdir(self._folder):
-			print 'creating folder:', os.path.split(self._folder)[1], self._engname
+			pprint('creating folder:', os.path.split(self._folder)[1], self._engname)
 			os.mkdir(self._folder)
 		print 'holter:', os.path.split(holter)[1], ' >>> ', os.path.split(self._folder)[1], self._engname
 		shutil.copy2(holter, self._folder)

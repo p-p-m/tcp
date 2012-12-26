@@ -1,6 +1,12 @@
 {% extends "empty.html" %}
 {% block body %}
     <h3> Выгрузить отчёт на сервер: </h3>
+    <form enctype=multipart/form-data method=post>
+        <dd><input type=file name="file">
+        <br>
+        <br>
+        <dd><input type=submit value="Отправить">
+    </form>
     <hr>
     <h3> Загрузить холтер с сервера: </h3>
     {% for date in holters.keys()|sort(true) %}
