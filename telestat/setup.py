@@ -13,5 +13,5 @@ setup(name='telestat',
       author='Pavel Marchuk',
       author_email='marchukpavelp@gmail.com',
       py_modules = ['holter_loader', 'HolterWrapper'],
-      console=['holter_loader.py']
+      console=['telestat_gui.py']
      )

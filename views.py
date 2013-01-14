@@ -219,7 +219,7 @@ def login():
         redirect_pages = {
                 'admin': url_for('first'),
                 'doctor': url_for('doctor_personal'),
-                'accountant': url_for('big_statistics'),
+                'accountant': url_for('small_statistics'),
             }
         if user:
             session['user'] = user
@@ -231,7 +231,7 @@ def login():
 
 
 @app.route('/doctor_personal/', methods=['POST', 'GET'])
-@tclogin.user_wrapper(group='doctor')
+@tclogin.user_wrapper(groups=['doctor'])
 def doctor_personal():
     '''
     Shows doctor main page if doctor is in session
@@ -287,7 +287,7 @@ def _allowed_file(filename):
 
 
 @app.route('/big_statistics/', methods=['POST', 'GET'])
-@tclogin.user_wrapper(group='accountant')
+@tclogin.user_wrapper(groups=['accountant'])
 def big_statistics():
     return render_template('big_statistics.html')
 

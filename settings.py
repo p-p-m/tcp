@@ -5,7 +5,7 @@ import doctors
 import glob
 
 ADMIN_PASSWORD = '12378956'
-ACC_PASSWORD = '123'
+ACC_PASSWORD = 'stem79'
 
 INBOX = u"C:/Program Files/Holter/Inbox"
 DOCTORS = u"C:/Program Files/Holter/Inbox/Doctors"

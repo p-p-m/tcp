@@ -20,7 +20,7 @@ class User (object):
 def all_users():
     doctors = [User(d.engname, d.password, 'doctor') for d in all_doctors()]
     admin = User('admin', ADMIN_PASSWORD, 'admin')
-    accountant = User('acc', ACC_PASSWORD, 'accountant')
+    accountant = User('tatiana', ACC_PASSWORD, 'accountant')
     return doctors + [admin, accountant]
 
 

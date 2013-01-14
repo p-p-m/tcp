@@ -3,3 +3,6 @@ doctors/*
 sublime/*
 venv/*
 log/*
+telestat/build/*
+telestat/dist/*
+telestat/*.txt
